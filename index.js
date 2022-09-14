@@ -6,8 +6,7 @@ const path = require('path');
 const resolve = require('resolve');
 
 module.exports = {
-  name: 'ember-dynamic-render-template',
-
+  name: require('./package').name,
   included() {
     this._super.included.apply(this, arguments);
     this.import(`${this._hasEmberSource() ? 'vendor' : 'bower_components'}/ember/ember-template-compiler.js`);
