@@ -10,7 +10,7 @@ module('Integration | Component | render template', function(hooks) {
     assert.expect(1);
 
     await render(hbs`
-      {{render-template templateString="abc"}}
+      <RenderTemplate @templateString="abc"/>
     `);
 
     assert.dom('*').hasText('abc');
@@ -22,7 +22,7 @@ module('Integration | Component | render template', function(hooks) {
     this.set('a', 1);
 
     await render(hbs`
-      {{render-template templateString="{{a}}" props=(hash a=a)}}
+      <RenderTemplate @templateString="\{\{this.a\}\}" @props={{hash a=this.a}}/>
     `);
 
     assert.dom('*').hasText('1');
@@ -38,7 +38,7 @@ module('Integration | Component | render template', function(hooks) {
     this.set('a', 1);
 
     await render(hbs`
-      {{render-template templateString="{{concat a 2}}" props=(hash a=a)}}
+      <RenderTemplate @templateString="\{\{concat this.a 2\}\}" @props={{hash a=this.a}}/>
     `);
 
     assert.dom('*').hasText('12');
@@ -50,7 +50,7 @@ module('Integration | Component | render template', function(hooks) {
     this.set('templateString', '{{concat 1 2}}');
 
     await render(hbs`
-      {{render-template templateString=templateString}}
+      <RenderTemplate @templateString={{this.templateString}}/>
     `);
 
     assert.dom('*').hasText('12');
