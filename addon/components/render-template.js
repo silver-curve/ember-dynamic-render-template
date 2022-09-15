@@ -2,7 +2,6 @@ import Component from '@ember/component';
 import { setOwner, getOwner } from '@ember/application';
 import { once } from '@ember/runloop';
 import { compileTemplate } from '@ember/template-compilation';
-import { assign } from '@ember/polyfills';
 import layout from '../templates/components/render-template';
 
 
@@ -20,7 +19,7 @@ export default Component.extend({
       let _props = this.get('props') || {};
       let domForAppWithGlimmer2 = owner.lookup('service:-document');
 
-      let props = assign({}, _props, {
+      let props = Object.assign({}, _props, {
         layout: compileTemplate(this.get('templateString') || ''),
       });
 
